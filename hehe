@@ -282,42 +282,49 @@ end
 
 
 checkValue = getCheckValue()
+
 local Forms = {'Astral Instinct'}
 
 function form()
-    local success = nil
-    pcall(function()
-        for i, v in pairs(Forms) do
-            if equipRemote:InvokeServer(v) then
-                success = true
-                break
-            end
+local success = false
+pcall(function()
+    for i, v in pairs(Forms) do
+        if equipRemote:InvokeServer(v) then
+            success = true
+            break
         end
-    end)
-
-    if success == nil then
-        repeat
-            task.wait(1)
-            pcall(function()
-                for i, v in pairs(Forms) do
-                    if equipRemote:InvokeServer(v) then
-                        success = true
-                        break
-                    end
-                end
-            end)
-        until success ~= nil
     end
+end)
 
+if not success then
     repeat
         task.wait(1)
         pcall(function()
-            if player.Status.SelectedTransformation.Value ~= player.Status.Transformation.Value then
-                game:GetService("ReplicatedStorage").Package.Events.ta:InvokeServer()
+            for i, v in pairs(Forms) do
+                if equipRemote:InvokeServer(v) then
+                    success = true
+                    break
+                end
             end
         end)
-    until player.Status.SelectedTransformation.Value == player.Status.Transformation.Value
+    until success
 end
+
+repeat
+    task.wait()
+    pcall(function()
+        if player.Status.SelectedTransformation.Value ~= player.Status.Transformation.Value then
+            game:GetService("ReplicatedStorage").Package.Events.ta:InvokeServer()
+        end
+    end)
+until player.Status.SelectedTransformation.Value == player.Status.Transformation.Value
+end
+
+spawn(function()
+while true and task.wait() do
+    form()
+end
+end)
 
 
 local function autoquest(boolean)
@@ -490,8 +497,8 @@ spawn(function()
             end)
     elseif game.PlaceId == 5151400895 then
             pcall(function()
+                repeat task.wait() until lplr:WaitForChild("Status"):WaitForChild("Transformation").Value == "Astral Instinct"
                 if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                    repeat task.wait() form() until lplr:WaitForChild("Status"):WaitForChild("Transformation").Value == "Astral Instinct"
                         for i, v in ipairs(game:GetService("Workspace").Living:GetChildren()) do
                             autoquest()	
                             if v.Name:lower() == SelectedMobs:lower() and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
