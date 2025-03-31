@@ -8,17 +8,41 @@ for i, v in pairs(waitfors) do
 end
 
 function startgame()
-    if (game.PlaceId ~= 5151400895) then
-        if lplr.PlayerGui:FindFirstChild("Start") then
-        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
-        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
-        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
-        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
-        lplr.PlayerGui.Main.bruh.Enabled = false
-        lplr.PlayerGui.Main.bruh.Enabled = true
+    local returning = nil
+    pcall(function ()
+        if game.PlaceId ~= 5151400895 then
+            if lplr.PlayerGui:FindFirstChild("Start") then
+                game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+                game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+                game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+                game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+                lplr.PlayerGui.Main.bruh.Enabled = false
+                lplr.PlayerGui.Main.bruh.Enabled = true
+                returning = true
+            end
         end
+    end)
+    
+    if returning == nil then
+        repeat
+            task.wait(1)
+            pcall(function ()
+                if game.PlaceId ~= 5151400895 then
+                    if lplr.PlayerGui:FindFirstChild("Start") then
+                        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+                        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+                        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+                        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+                        lplr.PlayerGui.Main.bruh.Enabled = false
+                        lplr.PlayerGui.Main.bruh.Enabled = true
+                        returning = true
+                    end
+                end
+            end)
+        until returning ~= nil
     end
 end
+
 
 task.spawn(startgame)
 
